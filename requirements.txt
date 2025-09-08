@@ -1,0 +1,31 @@
+# MCP Server Requirements
+# This file lists the dependencies needed for the local MCP servers project
+
+# Core MCP packages
+# These are the main packages used by the starter scripts
+# Note: The scripts use 'uvx' to run these without local installation,
+# but they're listed here for reference and alternative installation methods
+
+# Neo4j Cypher MCP Server
+# Used in start_cypher_server.py
+mcp-neo4j-cypher
+
+# Neo4j Data Modeling MCP Server 
+# Used in start_data_modeling_server.py (pinned to specific version)
+mcp-neo4j-data-modeling
+
+# Development dependencies (optional)
+# Uncomment if you need these for development or testing
+
+# Code formatting and linting
+# black
+# flake8
+# mypy
+
+# Testing
+# pytest
+# pytest-cov
+
+# Documentation
+# sphinx
+# sphinx-rtd-theme
