@@ -14,6 +14,13 @@ mcp-neo4j-cypher
 # Used in start_data_modeling_server.py (pinned to specific version)
 mcp-neo4j-data-modeling
 
+# Environment variable management
+# Used to load OAuth credentials from .env file
+python-dotenv
+
+# HTTP requests for OAuth authentication
+requests
+
 # Development dependencies (optional)
 # Uncomment if you need these for development or testing
 
@@ -29,3 +36,4 @@ mcp-neo4j-data-modeling
 # Documentation
 # sphinx
 # sphinx-rtd-theme
+uv
