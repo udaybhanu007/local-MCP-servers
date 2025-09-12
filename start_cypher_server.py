@@ -21,8 +21,8 @@ except ImportError:
 def start_cypher_server_http(port=None):
     """Start the MCP Neo4j Cypher server with HTTP transport"""
     
-    # Load environment variables from .env file
-    load_dotenv()
+    # Load environment variables from .env.dev file
+    load_dotenv('.env.dev')
     
     # Get port from environment variable if not provided
     if port is None:
@@ -60,9 +60,11 @@ def start_cypher_server_http(port=None):
         print("   • NEO4J_USERNAME & NEO4J_PASSWORD for basic auth")
         sys.exit(1)
     
-    # Build command using the installed executable
-    venv_path = os.path.dirname(sys.executable)
-    mcp_executable = os.path.join(venv_path, "mcp-neo4j-cypher.exe")
+    # Build command using the installed executable in virtual environment
+    # Use current working directory to find the .venv Scripts path
+    current_dir = os.getcwd()
+    venv_scripts_path = os.path.join(current_dir, ".venv", "Scripts")
+    mcp_executable = os.path.join(venv_scripts_path, "mcp-neo4j-cypher.exe")
     
     cmd = [
         mcp_executable,
@@ -100,7 +102,7 @@ def start_cypher_server_http(port=None):
 
 if __name__ == "__main__":
     # Load environment variables to get default port
-    load_dotenv()
+    load_dotenv('.env.dev')
     default_port = int(os.getenv("CYPHER_SERVER_PORT", 8003))
     
     # Allow port to be specified as command line argument
