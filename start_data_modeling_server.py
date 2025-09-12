@@ -22,7 +22,7 @@ def start_mcp_data_modeling_server(port=None):
     """Start the MCP Neo4j Data Modeling server with HTTP transport"""
     
     # Load environment variables from .env file
-    load_dotenv()
+    load_dotenv('.env.dev')
     
     # Get port from environment variable if not provided
     if port is None:
@@ -60,9 +60,11 @@ def start_mcp_data_modeling_server(port=None):
         print("   • NEO4J_USERNAME & NEO4J_PASSWORD for basic auth")
         sys.exit(1)
     
-    # Build command using the installed executable
-    venv_path = os.path.dirname(sys.executable)
-    mcp_executable = os.path.join(venv_path, "mcp-neo4j-data-modeling.exe")
+    # Build command using the installed executable in virtual environment
+    # Use current working directory to find the .venv Scripts path
+    current_dir = os.getcwd()
+    venv_scripts_path = os.path.join(current_dir, ".venv", "Scripts")
+    mcp_executable = os.path.join(venv_scripts_path, "mcp-neo4j-data-modeling.exe")
     
     # Data modeling server uses environment variables, not command line args for DB connection
     env = os.environ.copy()

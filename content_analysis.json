@@ -1,0 +1,107 @@
+{
+  "document_type": "research_paper",
+  "key_entities": [
+    {
+      "category": "dataset",
+      "keywords": [
+        "dataset",
+        "data",
+        "NIH",
+        "ChestX-ray",
+        "chest x-ray",
+        "medical imaging"
+      ]
+    },
+    {
+      "category": "methods",
+      "keywords": [
+        "deep learning",
+        "neural network",
+        "model"
+      ]
+    },
+    {
+      "category": "results",
+      "keywords": [
+        "accuracy",
+        "performance"
+      ]
+    },
+    {
+      "category": "authors",
+      "keywords": [
+        "author",
+        "NIH",
+        "Clinical Center"
+      ]
+    },
+    {
+      "category": "references",
+      "keywords": [
+        "reference",
+        "arxiv",
+        "paper"
+      ]
+    }
+  ],
+  "relationships": [],
+  "suggested_schema": {
+    "nodes": [
+      {
+        "label": "Document",
+        "properties": [
+          "title",
+          "type",
+          "page_count",
+          "creation_date"
+        ]
+      },
+      {
+        "label": "Page",
+        "properties": [
+          "number",
+          "text",
+          "word_count"
+        ]
+      },
+      {
+        "label": "Section",
+        "properties": [
+          "title",
+          "type",
+          "content"
+        ]
+      },
+      {
+        "label": "Keyword",
+        "properties": [
+          "term",
+          "category",
+          "frequency"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "type": "HAS_PAGE",
+        "from": "Document",
+        "to": "Page"
+      },
+      {
+        "type": "CONTAINS_SECTION",
+        "from": "Page",
+        "to": "Section"
+      },
+      {
+        "type": "MENTIONS",
+        "from": "Section",
+        "to": "Keyword"
+      },
+      {
+        "type": "MENTIONS",
+        "from": "Page",
+        "to": "Keyword"
+      }
+    ]
+  }
+}
