@@ -66,25 +66,31 @@ def start_cypher_server_http(port=None):
     venv_scripts_path = os.path.join(current_dir, ".venv", "Scripts")
     mcp_executable = os.path.join(venv_scripts_path, "mcp-neo4j-cypher.exe")
     
+    # Use environment variables like the data modeling server to avoid logging issues
+    env = os.environ.copy()
+    env.update({
+        "NEO4J_URI": neo4j_uri,
+        "NEO4J_USERNAME": neo4j_username,
+        "NEO4J_PASSWORD": neo4j_password,
+        "NEO4J_DATABASE": neo4j_database or "neo4j"
+    })
+    
     cmd = [
         mcp_executable,
-        "--db-url", neo4j_uri,
-        "--username", neo4j_username,
-        "--password", neo4j_password,
-        "--database", neo4j_database or "neo4j",
         "--transport", "http",
         "--server-host", "127.0.0.1",
         "--server-port", str(port),
         "--server-path", "/mcp/"
     ]
     
-    print(f"🔧 Command: {' '.join(cmd[:6])}... [credentials hidden]")
+    print(f"🔧 Command: {' '.join(cmd)}")
+    print(f"🌍 Environment: NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD set")
     print()
     print("📝 Press Ctrl+C to stop the server")
     print("-" * 30)
     
     try:
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, env=env, check=True)
     except KeyboardInterrupt:
         print("\n⏹️  Server stopped by user")
     except subprocess.CalledProcessError as e:
